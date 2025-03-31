@@ -1,0 +1,13 @@
+<mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="newBlogEntry.title">
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <mat-label>Blog Content</mat-label>
+    <textarea matInput [(ngModel)]="newBlogEntry.content"></textarea>
+  </mat-form-field><br/>
+  <button (click)="AddBlog()" mat-fab aria-label="Example icon button with a delete icon">
+    <mat-icon>edit_note</mat-icon>
+  </button>
+  
