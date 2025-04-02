@@ -1,10 +1,17 @@
 <mat-toolbar>
+  
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>My First Blog</span>
+    <span>My First Blog has {{myBlogArray.length}} Entries</span>
     <span class="example-spacer"></span>
-    <button matTooltip="Login" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <button routerLink="/" matTooltip="New Entry" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button routerLink="/newblog" matTooltip="New Entry" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button (click)="Singbaby()" matTooltip="Login" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>face</mat-icon>
     </button>
     

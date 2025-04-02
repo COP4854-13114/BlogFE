@@ -14,28 +14,6 @@ import { NewentryComponent } from "./components/newentry/newentry.component";
 })
 export class AppComponent {
   title = 'MyFirstBlog';
-  MyBlogEntries: BlogEntry[] = [
-    {
-      id:1,
-      title: "My First Blog ",
-      content:" My very wrody blog entry",
-      date: new
-      Date()
-     }
-  ,
-
-  {
-    id:2,
-    title: "My Second Blog ",
-    content:"Less wordy blog entry",
-    date: new
-    Date()
-   }
-];
-
-AddBlog(newBlog:BlogEntry)
-{
-  this.MyBlogEntries.push(newBlog)
-}
+  
   
 }

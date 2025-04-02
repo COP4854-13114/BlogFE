@@ -1,11 +1,2 @@
 <app-navbar></app-navbar>
-<app-newentry (NewBlogAdded)="AddBlog($event)"></app-newentry>
-<hr/>
-<h3>Blog Posts</h3>
-<!--<app-blogentry *ngFor="let blog of MyBlogEntries" [BlogEntry]="blog"></app-blogentry>-->
-@for(blog of MyBlogEntries; track blog.id){
-    <app-blogentry [BlogEntry]="blog"></app-blogentry>
-}
-
-
 <router-outlet />
