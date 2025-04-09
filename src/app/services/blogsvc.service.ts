@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BlogEntry } from '../models/blog-entry.model';
 
 @Injectable({
@@ -6,7 +6,36 @@ import { BlogEntry } from '../models/blog-entry.model';
 })
 export class BlogsvcService {
 
-  MyBlogEntries: BlogEntry[] = [
+  BlogSignal = signal<BlogEntry[]>([]);
+
+  constructor()
+  {
+    this.RetreiveBlogEntriesFromStorage();
+  }
+
+  AddBlogEntry(newEntry:BlogEntry){
+    const currentEntries = this.BlogSignal();
+    const newEntries = [...currentEntries, newEntry];
+    this.BlogSignal.set(newEntries);
+  }
+
+  SaveBlogEntriesToStorage(){
+    const currentBlogEntries = this.BlogSignal();
+    localStorage.setItem('MyBlogData', JSON.stringify(currentBlogEntries));
+  }
+
+  RetreiveBlogEntriesFromStorage()
+  {
+    let stringBlogEntries = localStorage.getItem('MyBlogData');
+    if(stringBlogEntries)
+    {
+      let blogEntries: BlogEntry[] = JSON.parse(stringBlogEntries);
+      this.BlogSignal.set(blogEntries);
+    }
+    
+  }
+
+  /*MyBlogEntries: BlogEntry[] = [
     {
       id:1,
       title: "My First Blog ",
@@ -23,8 +52,8 @@ export class BlogsvcService {
     date: new
     Date()
    }
-];
-  constructor() { }
+];*/
+  
 
   Sing()
   {

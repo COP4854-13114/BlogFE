@@ -11,10 +11,10 @@ import { BlogsvcService } from '../../services/blogsvc.service';
 })
 export class HomeComponent {
 
-  myBlogArray: BlogEntry[];
-constructor(private blogSvc:BlogsvcService)
+  //myBlogArray: BlogEntry[];
+constructor(public blogSvc:BlogsvcService)
 {
-  this.myBlogArray = blogSvc.MyBlogEntries;
+  //this.myBlogArray = blogSvc.MyBlogEntries;
 }
 
 

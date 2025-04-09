@@ -14,10 +14,10 @@ import { BlogEntry } from '../../models/blog-entry.model';
 })
 export class NavbarComponent {
 
-  myBlogArray: BlogEntry[];
-  constructor(private blogSvc:BlogsvcService)
+  
+  constructor(public blogSvc:BlogsvcService)
   {
-    this.myBlogArray = blogSvc.MyBlogEntries;
+    
   }
   Singbaby()
   {

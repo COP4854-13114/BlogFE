@@ -10,13 +10,13 @@ import { BlogsvcService } from '../../services/blogsvc.service';
   styleUrl: './new-blog-post.component.css'
 })
 export class NewBlogPostComponent {
-  myBlogArray: BlogEntry[];
+  
   constructor(private blogSvc:BlogsvcService)
   {
-    this.myBlogArray = blogSvc.MyBlogEntries;
+  
   }
   AddBlog(newBlog:BlogEntry)
   {
-    this.myBlogArray.push(newBlog);
+    this.blogSvc.AddBlogEntry(newBlog);
   }
 }
