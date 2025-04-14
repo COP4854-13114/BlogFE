@@ -11,6 +11,6 @@ export const routes: Routes = [
         path:'newblog', component: NewBlogPostComponent
     },
     {
-        path:'editBlog', component: EditBlogEntryComponent
+        path:'editBlog/:id', component: EditBlogEntryComponent
     }
 ];

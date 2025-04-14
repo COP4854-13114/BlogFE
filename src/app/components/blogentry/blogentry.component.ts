@@ -17,7 +17,7 @@ export class BlogentryComponent {
  }
  EditBlog()
  {
-   localStorage.setItem('currentId', this.currentBlogEntry!.id.toString());
-   this.router.navigate(['/editBlog']);
+   //localStorage.setItem('currentId', this.currentBlogEntry!.id.toString());
+   this.router.navigate([`/editBlog/${this.currentBlogEntry?.id}`]);
  }
 }

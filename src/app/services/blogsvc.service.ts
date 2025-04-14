@@ -1,22 +1,35 @@
 import { Injectable, signal } from '@angular/core';
 import { BlogEntry } from '../models/blog-entry.model';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
+
 })
 export class BlogsvcService {
 
   BlogSignal = signal<BlogEntry[]>([]);
 
-  constructor()
+  constructor(private httpClient:HttpClient)
   {
     this.RetreiveBlogEntriesFromStorage();
+    
   }
 
-  AddBlogEntry(newEntry:BlogEntry){
-    const currentEntries = this.BlogSignal();
-    const newEntries = [...currentEntries, newEntry];
-    this.BlogSignal.set(newEntries);
+  async AddBlogEntry(newEntry:BlogEntry){
+    let newBlogPost = await firstValueFrom(this.httpClient.post('http://localhost:3000/blogs', { title:newEntry.title, content:newEntry.content}));
+    if(newBlogPost)
+    {
+      const currentEntries = this.BlogSignal();
+      const newEntries = [...currentEntries, newEntry];
+      this.BlogSignal.set(newEntries);
+    }
+    else
+    {
+      alert('Error');
+    }
+    
   }
 
   SaveBlogEntriesToStorage(){
@@ -24,15 +37,27 @@ export class BlogsvcService {
     localStorage.setItem('MyBlogData', JSON.stringify(currentBlogEntries));
   }
 
-  RetreiveBlogEntriesFromStorage()
+  async RetreiveBlogEntriesFromStorage()
   {
-    let stringBlogEntries = localStorage.getItem('MyBlogData');
+    /*let stringBlogEntries = localStorage.getItem('MyBlogData');
     if(stringBlogEntries)
     {
       let blogEntries: BlogEntry[] = JSON.parse(stringBlogEntries);
       this.BlogSignal.set(blogEntries);
+    }*/
+
+    let response = await firstValueFrom(this.httpClient.get('http://localhost:3000/blogs'));
+    this.BlogSignal.set(response as BlogEntry[]);
+    return response;
+  }
+
+  async EditPost(editEntry:BlogEntry)
+  {
+   let response = await firstValueFrom(this.httpClient.put(`http://localhost:3000/blogs/${editEntry.id}`, {
+      title: editEntry.title,
+      content: editEntry.content
     }
-    
+    ));
   }
 
   /*MyBlogEntries: BlogEntry[] = [
