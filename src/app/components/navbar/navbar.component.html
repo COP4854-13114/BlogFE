@@ -8,14 +8,17 @@
     <button routerLink="/" matTooltip="New Entry" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>home</mat-icon>
     </button>
-    <button routerLink="/newblog" matTooltip="New Entry" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>add</mat-icon>
-    </button>
-    <button (click)="Singbaby()" matTooltip="Login" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    @if(this.authSvc.TokenSignal())
+    {
+      <button routerLink="/newblog" matTooltip="New Entry" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>add</mat-icon>
+      </button>
+    }
+    <button routerLink="/login" matTooltip="Login" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>face</mat-icon>
     </button>
-    <button (click)="blogSvc.SaveBlogEntriesToStorage()">Save Blog</button>
-    <button (click)="blogSvc.RetreiveBlogEntriesFromStorage()">Retrieve Blog</button>
+    <!--<button (click)="blogSvc.SaveBlogEntriesToStorage()">Save Blog</button>
+    <button (click)="blogSvc.RetreiveBlogEntriesFromStorage()">Retrieve Blog</button>-->
     
  </mat-toolbar>
   

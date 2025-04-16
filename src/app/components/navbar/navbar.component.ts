@@ -6,6 +6,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { BlogsvcService } from '../../services/blogsvc.service';
 import { BlogEntry } from '../../models/blog-entry.model';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-navbar',
   imports: [MatToolbarModule, MatButtonModule, MatIconModule,MatTooltipModule,RouterModule],
@@ -15,7 +16,7 @@ import { BlogEntry } from '../../models/blog-entry.model';
 export class NavbarComponent {
 
   
-  constructor(public blogSvc:BlogsvcService)
+  constructor(public blogSvc:BlogsvcService, public authSvc:AuthService)
   {
     
   }

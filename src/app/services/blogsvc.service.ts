@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { BlogEntry } from '../models/blog-entry.model';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,16 @@ export class BlogsvcService {
 
   BlogSignal = signal<BlogEntry[]>([]);
 
-  constructor(private httpClient:HttpClient)
+  constructor(private httpClient:HttpClient, private authSvc:AuthService)
   {
     this.RetreiveBlogEntriesFromStorage();
     
   }
 
   async AddBlogEntry(newEntry:BlogEntry){
-    let newBlogPost = await firstValueFrom(this.httpClient.post('http://localhost:3000/blogs', { title:newEntry.title, content:newEntry.content}));
+    let newBlogPost = await firstValueFrom(this.httpClient.post('http://localhost:3000/blogs', { title:newEntry.title, content:newEntry.content}, {headers:{
+      Authorization: `Bearer ${this.authSvc.TokenSignal()}`
+    }}));
     if(newBlogPost)
     {
       const currentEntries = this.BlogSignal();
